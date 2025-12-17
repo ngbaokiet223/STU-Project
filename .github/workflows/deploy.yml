@@ -1,0 +1,14 @@
+name: Deploy to Render STU
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render Deploy
+        # Dán link bạn vừa copy vào trong dấu ngoặc kép dưới đây
+        run: curl -X POST "https://api.render.com/deploy/srv-d51emlshg0os7388sie0?key=wGiaF5E6SvY"
