@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
-  res.send('<h1>Xin chao STU - Project Nodejs</h1>');
+  res.send('<h1>Xin chao STU - Phien ban FEATURE</h1>');
 });
 
 app.listen(port, () => {
