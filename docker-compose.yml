@@ -1,32 +1,27 @@
 version: '3.8'
 
 services:
-  # --- PROJECT 1: NODEJS APP ---
+  # --- PROJECT 1: NODEJS + MYSQL (Cũ) ---
   backend-node:
-    build: .                 # Build từ Dockerfile hiện tại
-    container_name: stu-node-app
+    build: .
+    container_name: project1_node
     ports:
-      - "8080:3000"          # Web chạy ở port 8080
+      - "8080:3000"
     environment:
       - DB_HOST=db-mysql
-      - DB_USER=root
-      - DB_PASS=123456
     depends_on:
-      - db-mysql             # Chờ database chạy trước
-    networks:
-      - stu-network
+      - db-mysql
 
-  # --- DATABASE: MYSQL ---
   db-mysql:
     image: mysql:5.7
-    container_name: stu-mysql-db
+    container_name: project1_db
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: studb
-    networks:
-      - stu-network
 
-# Tạo mạng riêng để 2 cái này nhìn thấy nhau
-networks:
-  stu-network:
-    driver: bridge
+  # --- PROJECT 2: PHP (Mới thêm) ---
+  web-php:
+    build: ./project2_php   # Dùng Dockerfile trong thư mục mới
+    container_name: project2_php
+    ports:
+      - "8081:80"           # Chạy ở cổng 8081
