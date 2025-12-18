@@ -1,0 +1,214 @@
+/* ========================================================= */
+/* ADMIN DASHBOARD STYLES (CLEAN & PROFESSIONAL) */
+/* ========================================================= */
+
+/* GLOBAL RESET AND BASE */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f6f9; /* Nền xám nhẹ cho toàn bộ admin */
+    display: flex; /* Bắt buộc để Sidebar và Content nằm cạnh nhau */
+    min-height: 100vh;
+}
+
+/* --- 1. SIDEBAR (THANH MENU TRÁI) --- */
+.sidebar {
+    width: 250px;
+    background: #343a40; /* Nền xám đen lịch sự */
+    color: white;
+    padding: 20px;
+    flex-shrink: 0; /* Quan trọng: Ngăn sidebar bị co lại */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffc107; /* Màu vàng cam (Accent Color) */
+    text-transform: uppercase;
+    font-size: 1.4em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #c2c7d0;
+    padding: 12px;
+    text-decoration: none;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    font-size: 0.95em;
+}
+
+.sidebar a:hover {
+    background: #495057;
+    color: white;
+}
+
+.sidebar a.active {
+    background: #495057;
+    color: white;
+    border-left: 4px solid #ffc107; /* Viền vàng nổi bật mục đang chọn */
+}
+
+.sidebar a i {
+    font-size: 1.1em;
+    width: 20px; /* Cố định vị trí icon */
+}
+
+/* --- 2. MAIN CONTENT (KHU VỰC CHÍNH) --- */
+.main-content {
+    flex: 1; /* Chiếm hết phần còn lại */
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.card h1, .card h2 {
+    color: #343a40;
+    font-size: 1.8em;
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- 3. BẢNG DỮ LIỆU (TABLES) --- */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.table th {
+    background: #f8f9fa;
+    color: #343a40;
+    padding: 15px 12px;
+    text-align: left;
+    border-top: 2px solid #e9ecef;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- 4. TRẠNG THÁI & NÚT HÀNH ĐỘNG --- */
+.status-pending {
+    background: #ffc107; /* Vàng */
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+.status-completed {
+    background: #28a745; /* Xanh lá */
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.btn-action {
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9em;
+    margin-right: 5px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.btn-action:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-view { background: #17a2b8; } /* Xanh dương */
+.btn-edit { background: #6c757d; } /* Xám */
+.btn-del { background: #dc3545; } /* Đỏ */
+
+.btn-add-new {
+    background: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+/* --- RESPONSIVE (Dành cho màn hình nhỏ) --- */
+@media (max-width: 992px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding-bottom: 10px;
+    }
+    .sidebar h2 {
+        display: none;
+    }
+    .sidebar nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 5px;
+    }
+    .sidebar a {
+        padding: 8px 10px;
+        flex-grow: 1;
+        text-align: center;
+        justify-content: center;
+    }
+    .main-content {
+        padding: 15px;
+    }
+    .table thead {
+        display: none;
+    }
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}

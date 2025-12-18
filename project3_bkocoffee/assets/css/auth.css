@@ -1,0 +1,96 @@
+/* ========================================= */
+/* FILE: assets/css/auth.css                 */
+/* DÙNG CHO: LOGIN.PHP, REGISTER.PHP         */
+/* ========================================= */
+
+* { box-sizing: border-box; }
+
+body {
+    /* Nền Gradient Nâu Cà Phê */
+    background: linear-gradient(135deg, #3e2723 0%, #6d4c41 100%);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    
+    /* CĂN GIỮA KHUNG ĐĂNG NHẬP */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Cao bằng màn hình */
+    color: white;
+}
+
+/* KHUNG THẺ (CARD) */
+.login-card {
+    background-color: rgba(255, 255, 255, 0.1); /* Trong suốt */
+    backdrop-filter: blur(10px); /* Mờ nền sau */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* TIÊU ĐỀ */
+h1 {
+    text-align: center;
+    margin-top: 0;
+    font-size: 2.5em;
+}
+
+.subtitle {
+    text-align: center;
+    color: #f5f5f5;
+    margin-bottom: 30px;
+}
+
+/* INPUT VÀ FORM */
+.input-group { margin-bottom: 20px; }
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f5f5f5;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1em;
+}
+
+input::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* NÚT BẤM */
+button {
+    background: linear-gradient(90deg, #3e2723, #6d4c41);
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s;
+}
+
+button:hover { transform: scale(1.02); }
+
+/* LIÊN KẾT */
+.signup-link { text-align: center; margin-top: 20px; }
+.signup-link a { color: #ffcc80; text-decoration: none; font-weight: bold; }
+.message { text-align: center; padding: 10px; border-radius: 5px; background: rgba(255,0,0,0.2); color: #ffcccc; }

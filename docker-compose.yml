@@ -25,3 +25,10 @@ services:
     container_name: project2_php
     ports:
       - "8081:80"           # Chạy ở cổng 8081
+
+# --- PROJECT 3: BKO COFFEE ---
+  web-bkocoffee:
+    build: ./project3_bkocoffee
+    container_name: bkocoffee_app
+    ports:
+      - "8082:80"   # Chạy ở cổng 8082 (để không đụng 8080 và 8081)
