@@ -1,0 +1,23 @@
+name: Deploy BKO COFFEE to Hosting FTP
+on:
+  push:
+    branches:
+      - main
+jobs:
+  web-deploy:
+    name: 🎉 Deploy via FTP
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+
+    - name: 📂 Sync files to Hosting
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        # Chỉ lấy code trong thư mục quán cafe
+        local-dir: ./project3_bkocoffee/
+        # Chép vào thư mục gốc của Hosting (thường là htdocs)
+        server-dir: ./htdocs/
