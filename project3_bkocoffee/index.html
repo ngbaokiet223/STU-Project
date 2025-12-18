@@ -1,142 +1,153 @@
-<?php
-require 'config.php';
-
-// Xử lý logic giỏ hàng (Giữ nguyên)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart_quick'])) {
-    // Logic này để phòng hờ, nhưng giao diện mới ta sẽ bỏ nút thêm nhanh ở ngoài
-}
-
-// Lấy sản phẩm mới nhất
-$products = [];
-try {
-    $stmt = $pdo->query('SELECT * FROM products ORDER BY id DESC LIMIT 8');
-    $products = $stmt->fetchAll();
-} catch (PDOException $e) {
-    echo "Lỗi: " . $e->getMessage();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Chủ - Kiet Ban Cafe</title>
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Thêm CSS cơ bản cho Header/Footer nếu file css ngoài chưa có */
+        body { margin: 0; font-family: sans-serif; }
+        header { background: #333; color: white; padding: 15px 0; text-align: center; }
+        header nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        footer { background: #222; color: #ccc; padding: 20px 0; text-align: center; margin-top: 50px; }
+        
+        /* CSS cho lưới sản phẩm */
+        .product-list { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
+        .product-item { border: 1px solid #ddd; border-radius: 8px; width: 250px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .product-img-box img { max-width: 100%; height: auto; border-radius: 5px; }
+        .product-name { font-size: 18px; color: #333; margin: 10px 0; }
+        .price { color: #d35400; font-weight: bold; font-size: 16px; }
+        .no-image { background: #eee; padding: 40px 0; border-radius: 5px; color: #888; }
+        
+        /* Banner */
+        .main-banner { position: relative; text-align: center; color: white; background: #000; overflow: hidden; }
+        .main-banner img { width: 100%; opacity: 0.7; display: block; }
+        .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .btn-banner, .btn-view-all { background: #e67e22; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    </style>
 </head>
 <body>
     
-    <?php require 'includes/header.php'; ?>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>KIET BAN COFFEE</h1>
+            </div>
+            <nav>
+                <a href="index.html">TRANG CHỦ</a>
+                <a href="#">MENU</a>
+                <a href="#">GIỚI THIỆU</a>
+                <a href="#">LIÊN HỆ</a>
+            </nav>
+        </div>
+    </header>
     
     <div class="main-banner">
-    <img src="assets/css/images/uu.jpg" alt="Banner Cà Phê"> 
-    <div class="banner-content">
-        <h2>HƯƠNG VỊ CÀ PHÊ ĐÍCH THỰC</h2>
-        <p>Đậm đà bản sắc Việt - Khơi dậy mọi giác quan</p>
-        <a href="menu.php" class="btn-banner">MUA NGAY</a>
+        <img src="assets/css/images/uu.jpg" alt="Banner Cà Phê" onerror="this.style.display='none';"> 
+        <div class="banner-content">
+            <h2>HƯƠNG VỊ CÀ PHÊ ĐÍCH THỰC</h2>
+            <p>Đậm đà bản sắc Việt - Khơi dậy mọi giác quan</p>
+            <br>
+            <a href="#" class="btn-banner">MUA NGAY</a>
+        </div>
     </div>
-</div>
-    <!-- <div id="cartToast" class="toast-notification">
-        <i class="fas fa-check-circle" style="margin-right: 8px;"></i> ĐÃ THÊM VÀO GIỎ HÀNG THÀNH CÔNG!
-    </div> -->
 
     <div class="container"> 
-        <h1>SẢN PHẨM NỔI BẬT</h1>
+        <h1 style="text-align: center; margin-top: 40px;">SẢN PHẨM NỔI BẬT</h1>
         
         <div class="product-list"> 
-            <?php foreach ($products as $product): ?>
-                <div class="product-item">
-                    
-                    <a href="sanpham.php?id=<?php echo $product['id']; ?>" class="product-link">
-                        <div class="product-img-box">
-                            <?php if (!empty($product['image_url'])): ?>
-                                <img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
-                            <?php else: ?>
-                                <div class="no-image">
-                                    <i class="fas fa-coffee"></i><br>
-                                    Món ngon
-                                </div>
-                            <?php endif; ?>
+            
+            <div class="product-item">
+                <a href="#" class="product-link">
+                    <div class="product-img-box">
+                        <div class="no-image">
+                            <i class="fas fa-coffee fa-3x"></i><br><br>
+                            Món ngon
                         </div>
-                    </a>
-                    
-                    <a href="sanpham.php?id=<?php echo $product['id']; ?>" class="product-link">
-                        <h2 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h2>
-                    </a>
-                    
-                    <span class="price"><?php echo number_format($product['price']); ?> VNĐ</span>
-                    
-                </div>
-            <?php endforeach; ?>
+                    </div>
+                </a>
+                <a href="#" class="product-link">
+                    <h2 class="product-name">Cà Phê Sữa Đá</h2>
+                </a>
+                <span class="price">29.000 VNĐ</span>
+            </div>
+
+            <div class="product-item">
+                <a href="#" class="product-link">
+                    <div class="product-img-box">
+                        <div class="no-image">
+                            <i class="fas fa-mug-hot fa-3x"></i><br><br>
+                            Món ngon
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="product-link">
+                    <h2 class="product-name">Bạc Xỉu</h2>
+                </a>
+                <span class="price">35.000 VNĐ</span>
+            </div>
+
+            <div class="product-item">
+                <a href="#" class="product-link">
+                    <div class="product-img-box">
+                        <div class="no-image">
+                            <i class="fas fa-glass-whiskey fa-3x"></i><br><br>
+                            Món ngon
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="product-link">
+                    <h2 class="product-name">Trà Đào Cam Sả</h2>
+                </a>
+                <span class="price">45.000 VNĐ</span>
+            </div>
+
+            <div class="product-item">
+                <a href="#" class="product-link">
+                    <div class="product-img-box">
+                        <div class="no-image">
+                            <i class="fas fa-cookie-bite fa-3x"></i><br><br>
+                            Món ngon
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="product-link">
+                    <h2 class="product-name">Bánh Tiramisu</h2>
+                </a>
+                <span class="price">50.000 VNĐ</span>
+            </div>
+
         </div>
 
-        <div style="text-align: center;">
-            <a href="menu.php" class="btn-view-all">XEM TẤT CẢ MENU</a>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="#" class="btn-view-all">XEM TẤT CẢ MENU</a>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toast = document.getElementById('cartToast');
-            // Kiểm tra nếu có Session báo thành công (Bạn cần gửi Session này từ PHP)
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            // Giả định bạn đã gửi status=added qua URL (Cách đơn giản nhất)
-            if (urlParams.get('status') === 'added') { 
-                showToast();
-            }
-
-            function showToast() {
-                toast.classList.add('show');
-                
-                // Tự động ẩn sau 6 giây
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 6000); 
-                
-                // Xóa tham số status khỏi URL để tránh F5 lại hiện Toast
-                history.replaceState(null, '', window.location.pathname + window.location.search.replace(/&?status=added/, ''));
-            }
-            
-            // *** Nếu bạn dùng POST, hãy kích hoạt Toast sau khi POST thành công mà không redirect ***
-            // (Đây là cách nâng cao hơn, yêu cầu xử lý AJAX hoặc đặt biến PHP)
-
-            // VÍ DỤ: Nếu bạn sử dụng biến PHP:
-            <?php if (isset($_SESSION['toast_status'])): ?>
-                showToast();
-                <?php unset($_SESSION['toast_status']); ?> // Xóa session để không hiện lại
-            <?php endif; ?>
-        });
-    </script>
+    <footer>
+        <p>&copy; 2025 Kiet Ban Coffee. All rights reserved.</p>
+        <p>Địa chỉ: Trường Đại Học Công Nghệ Sài Gòn (STU)</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('header');
-            // Vị trí mà header sẽ chuyển đổi (Thường là chiều cao của banner - header)
-            const scrollPoint = 400; // Đổi số này nếu banner của bạn cao/thấp hơn
+            const scrollPoint = 200; 
 
             function handleScroll() {
-                // Lấy vị trí cuộn hiện tại
                 const currentScrollPos = window.scrollY;
-
                 if (currentScrollPos > scrollPoint) {
-                    // Nếu cuộn quá vị trí quy định, thêm class 'scrolled'
-                    header.classList.add('scrolled');
+                    header.style.backgroundColor = 'rgba(0,0,0,0.9)'; // Hiệu ứng tối màu khi cuộn
                 } else {
-                    // Ngược lại, xóa class 'scrolled'
-                    header.classList.remove('scrolled');
+                    header.style.backgroundColor = '#333'; // Màu gốc
                 }
             }
-
-            // Kích hoạt sự kiện khi cuộn trang
             window.addEventListener('scroll', handleScroll);
-            
-            // Chạy lần đầu để đảm bảo trạng thái đúng khi tải trang
-            handleScroll();
         });
     </script>
-    
-    <?php require 'includes/footer.php'; ?>
 
 </body>
 </html>
